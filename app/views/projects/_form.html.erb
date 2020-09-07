@@ -1,0 +1,32 @@
+<%= form_with(model: project, local: true, multipart: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation" class="p-6 mb-5 tect-red-500 bg white rounded">
+      <h2 class="font-bold text-red-500"><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+        <% project.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :donation_goal %>
+    <%= form.text_field :donation_goal %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

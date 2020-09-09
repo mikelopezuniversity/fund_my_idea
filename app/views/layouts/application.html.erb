@@ -31,7 +31,7 @@
     <header class="mb-4">
       <nav class="flex flex-wrap items-center justify-between px-3 py-3 text-gray-700 lg:px-10">
         <div class="flex items-center mr-6 flex-no-shrink">
-          <%= link_to "Fund My Project", root_path, class:"btn btn-default" %>
+          <%= link_to "Back My Idea", root_path, class:"link text-lg tracking-wider font-semibold uppercase" %>
         </div>
         <div class="block lg:hidden">
           <button class="flex items-center px-3 py-2 text-white border border-gray-500 rounded hover:text-gray-200 hover:border-gray-200">
@@ -40,15 +40,15 @@
         </div>
         <div class="items-center block w-full text-center lg:flex-1 lg:flex lg:text-left">
           <div class="lg:flex-grow">
-            <%= link_to "New Project", new_project_path, class: "btn btn-default mb-2 lg:mb-0" %>
+            <%= link_to "New Project", new_project_path, class: "btn btn-white mb-2 lg:mb-0" %>
           </div>
           <div class="items-center block w-full mt-2 text-center lg:flex lg:flex-row lg:flex-1 lg:mt-0 lg:text-left lg:justify-end">
             <% if user_signed_in? %>
-              <%= link_to "My Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
-              <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-default mb-2 lg:mb-0 block" %>
+              <%= link_to "Account", edit_user_registration_path, class: "btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"btn btn-default mb-2 lg:mb-0 block" %>
             <% else %>
 
-              <%= link_to "Sign In", new_user_session_path, class:"btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
+              <%= link_to "Login", new_user_session_path, class:"btn btn-default mb-2 lg:mr-2 lg:mb-0 block" %>
               <%= link_to "Sign Up", new_user_registration_path, class:"btn btn-default block" %>
             <% end %>
           </div>

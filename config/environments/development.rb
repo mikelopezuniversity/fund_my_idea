@@ -62,6 +62,6 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   Rails.application.configure do
     # Whitelist one hostname
-    config.hosts << "https://fund-my-projects.wl.r.appspot.com/"
+    config.hosts << "fund-my-projects.wl.r.appspot.com"
   end
 end

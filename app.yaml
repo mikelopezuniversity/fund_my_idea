@@ -1,6 +1,6 @@
 runtime: ruby
 env: flex
-entrypoint: bundle exec puma -p 80
+entrypoint: bundle exec puma -p 8080
 # This sample incurs costs to run on the App Engine flexible environment.
 # The settings below are to reduce costs during testing and are not appropriate
 # for production use. For more information, see:

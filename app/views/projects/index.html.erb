@@ -10,7 +10,7 @@
         <div class="my-1"><%= truncate(strip_tags(project.description.to_s), length: 140) %></div>
         <%= project.donation_goal %>
         <% if project.thumbnail.attached? %>
-          <%= image_tag project.thumbnail.variant(resize_to_limit: [600, 400]) %>
+          <%= image_tag project.thumbnail.variant(resize_to_limit: [100, 100]) %>
         <% end %>
         <%= link_to 'View Project', project, class: "btn btn-default inline-block text-center my-2" %>
         <%  if author_of(project) %>

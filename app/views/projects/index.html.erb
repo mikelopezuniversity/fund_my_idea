@@ -7,7 +7,7 @@
     <% @projects.each do |project| %>
     <div class="relative w-full p-6 border-2 border-blue-700 rounded-lg lg:w-1/4 lg:mr-8"
         <h2 class="mb-2 text-2xl font-bold"><%= project.title %></h2>
-        <div classd="my-1"></div>
+        <div class="my-1"><%= truncate(strip_tags(project.description.to_s), length: 140) %></div>
         <%= project.donation_goal %>
         <%= link_to 'View Project', project, class: "btn btn-default inline-block text-center my-2" %>
         <%  if author_of(project) %>

@@ -112,6 +112,6 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   Rails.application.configure do
     # Whitelist one hostname
-    config.hosts << "fund-my-projects.wl.r.appspot.com"
+    config.hosts << "arcane-citadel-75097.herokuapp.com"
   end
 end

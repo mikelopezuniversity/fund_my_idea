@@ -63,5 +63,9 @@ Rails.application.configure do
   Rails.application.configure do
     # Whitelist one hostname
     config.hosts << "arcane-citadel-75097.herokuapp.com"
+
+  Rails.application.configure do
+    # Whitelist one hostname
+    config.hosts << "www.fundmyproject.ml"
   end
 end

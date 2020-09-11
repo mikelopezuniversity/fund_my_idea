@@ -48,5 +48,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   Rails.application.configure do
     config.hosts << "arcane-citadel-75097.herokuapp.com"
+  Rails.application.configure do
+    # Whitelist one hostname
+    config.hosts << "www.fundmyproject.ml"
   end
 end

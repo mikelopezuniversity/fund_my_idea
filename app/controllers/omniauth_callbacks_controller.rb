@@ -9,6 +9,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.access_code = auth_data.credentials.token
       @user.publishable_key = auth_data.info.stripe_publishable_key
       @user.save
+</h4>
+    <% end %>
 
       sign_in_and_redirect @user, event: :authentication
       flash[:notice] = 'Stripe Account Created And Connected' if is_navigational_format?

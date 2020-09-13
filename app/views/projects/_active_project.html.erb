@@ -289,7 +289,7 @@
         <%= project.description %>
       </div>
 
-      <h3 class="text-2xl text-gray-900">Back this idea</h3>
+      <h3 class="text-2xl text-gray-900">Fund this project</h3>
 
       <% project.perks.each do |perk| %>
         <div class="p-4 mb-6 bg-gray-100 border rounded">
@@ -302,7 +302,7 @@
           <% if user_signed_in? && perk.project.user_id == current_user.id %>
             <em class="block text-sm text-center">Sorry, You can't back your own idea</em>
           <% else %>
-          <%= link_to "Back this idea for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
+          <%= link_to "Fund this project for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
           <% end %>
         </div>
       <% end %>
@@ -314,5 +314,4 @@
       <%= link_to 'Edit', edit_project_path(project), class: "btn btn-sm btn-outlined btn-default" %>
       <%= link_to 'Delete', project_path(project), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
     </div>
-  <% end %>
-</div>
+<% end %>

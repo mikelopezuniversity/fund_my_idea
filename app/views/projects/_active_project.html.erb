@@ -72,10 +72,11 @@
 </div>
 </div>
 
+
  <% if admin? || author_of(project) %>
     <div class="absolute top-0 right-0 mt-4 mr-4">
-      <%= link_to 'Edit Project', edit_project_path(project), class: "btn btn-sm btn-outlined btn-default" %>
-      <%= link_to 'Delete Project', project_path(project), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
+      <%= link_to 'Edit', edit_project_path(project), class: "btn btn-sm btn-outlined btn-default" %>
+      <%= link_to 'Delete', project_path(project), method: :delete, class: "btn btn-sm btn-outlined btn-default", data: { confirm: "Are you sure?" } %>
     </div>
   <% end %>
 </div>

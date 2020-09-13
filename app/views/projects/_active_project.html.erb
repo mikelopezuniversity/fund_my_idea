@@ -3,18 +3,18 @@
     <div class="flex flex-wrap items-start justify-between w-full pb-4 mb-4 border-b-2 border-gray-200">
       <div class="flex-1">
         <h1 class="text-3xl font-bold leading-none text-gray-800"><%= project.title %></h1>
-        <p class="text-sm italic text-gray-500">Created by <%= project.user.first_name %> <%= project.user.last_name %></p>
+        <p class="text-sm italic text-gray-500">Created by <%= project.user.name ||=
+      project.user.username %></p>
       </div>
-    </div>
 
     <div class="w-full mb-4 lg:w-1/5 lg:mb-0">
-      <p class="m-0 text-xl font-semibold leading-none"><%= number_to_currency(project.current_donation_amount) %>/mo</p>
-      <p class="text-sm text-gray-500">pledged of <%= number_to_currency(project.donation_goal) %>/mo</p>
+      <p class="m-0 text-xl font-semibold leading-none"><%= number_to_currency(project.current_donation_amount) %></p>
+      <p class="text-sm text-gray-500">pledged of <%= number_to_currency(project.donation_goal) %></p>
     </div>
 
     <div class="w-full mb-4 lg:w-1/5 lg:mb-0">
       <p class="m-0 text-xl font-semibold leading-none">200</p>
-      <p class="text-sm text-gray-500">funders</p>
+      <p class="text-sm text-gray-500">backers</p>
     </div>
 
     <div class="w-full mb-4 lg:w-1/5 lg:mb-0">
@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="flex flex-wrap items-start justify-between mb-6">
+  <div class="flex flex-wrap items-start justify-between w-full mb-6">
     <div class="w-full lg:w-3/5">
     <% if project.thumbnail.present? %>
       <%= image_tag project.thumbnail, class: "rounded" %>
@@ -35,43 +35,37 @@
         </div>
       </div>
     <% end %>
+      <div class="my-6">
+        <%= render "comments/comments", commentable: project  %>
+        <%= render "comments/form", commentable: project %>
+      </div>
     </div>
+
     <div class="w-full mt-6 lg:pl-10 lg:w-2/5 lg:mt-0">
-      <p class="text-sm font-semibold text-gray-500 uppercase">Description</p>
-      <%= project.description %>
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-gray-500 uppercase">Description</p>
+        <%= project.description %>
+      </div>
+
+      <h3 class="text-2xl text-gray-900">Back this idea</h3>
+
+      <% project.perks.each do |perk| %>
+        <div class="p-4 mb-6 bg-gray-100 border rounded">
+          <h4 class="text-lg font-bold text-center text-gray-900"><%= perk.title %></h4>
+          <p class="pb-2 mb-2 text-sm italic text-center border-b"><%= perk.quantity %> left</p>
+          <div class="py-2 text-gray-700">
+            <%= simple_format perk.description %>
+          </div>
+
+          <% if user_signed_in? && perk.project.user_id == current_user.id %>
+            <em class="block text-sm text-center">Sorry, You can't back your own idea</em>
+          <% else %>
+          <%= link_to "Back this idea for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
-
-  <div class="w-full lg:w-3/5">
-    <%= render "comments/comments", commentable: project  %>
-    <%= render "comments/form", commentable: project %>
-  </div>
-
-  <h3 class="text-2xl text-gray-900">Fund this Project</h3>
-
-  <% project.perks.each do |perk| %>
-  <div class="p-4 mb-6 bg-gray-100 border rounded">
-    <h4 class="text-lg font-bold text-center text-gray-900"><%= perk.title %></h4>
-    <p class="pb-2 mb-2 text-sm italic text-center border-b"><%= perk.quantity %> left</p>
-    <div class="py-2 text-gray-700">
-      <%= simple_format perk.description %>
-    </div>
-
-    <%= link_to "Fund this project for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
-  </div>
-<% end %>
-
-
-    <% if user_signed_in? && perk.project.user_id == current_user.id %>
-      <em class="block text-sm text-center">Sorry, You can't fund your own project</em>
-    <% else %>
-    <%= link_to "Fund this project for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
-    <% end %>
-  </div>
-<% end %>
-</div>
-</div>
-
 
  <% if admin? || author_of(project) %>
     <div class="absolute top-0 right-0 mt-4 mr-4">

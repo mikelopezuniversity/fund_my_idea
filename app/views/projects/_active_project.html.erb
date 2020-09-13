@@ -57,6 +57,11 @@
       <%= simple_format perk.description %>
     </div>
 
+    <%= link_to "Fund this project for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project), class: "btn btn-default btn-expanded" %>
+  </div>
+<% end %>
+
+
     <% if user_signed_in? && perk.project.user_id == current_user.id %>
       <em class="block text-sm text-center">Sorry, You can't fund your own project</em>
     <% else %>

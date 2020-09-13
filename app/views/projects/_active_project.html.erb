@@ -3,7 +3,7 @@
     <div class="flex flex-wrap items-start justify-between w-full pb-4 mb-4 border-b-2 border-gray-200">
       <div class="flex-1">
         <h1 class="text-3xl font-bold leading-none text-gray-800"><%= project.title %></h1>
-        <p class="text-sm italic text-gray-500">Created by <%= project.user.last_name %> <%= project.user.last_name %></p>
+        <p class="text-sm italic text-gray-500">Created by <%= project.user.first_name %> <%= project.user.last_name %></p>
       </div>
 
     <div class="w-full mb-4 lg:w-1/5 lg:mb-0">
@@ -54,7 +54,7 @@
           <p class="pb-2 mb-2 text-sm italic text-center border-b"><%= perk.quantity %> left</p>
           <div class="py-2 text-gray-700">
             <%= simple_format perk.description %>
-          </div>
+          </div>backers
 
           <% if user_signed_in? && perk.project.user_id == current_user.id %>
             <em class="block text-sm text-center">Sorry, You can't fund your own project</em>

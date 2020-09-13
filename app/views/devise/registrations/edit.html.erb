@@ -69,7 +69,8 @@
 
   <div class="w-full text-left lg:pl-16 lg:w-1/2">
   <div class="p-6 mt-10 text-gray-900 bg-white rounded shadow-lg">
-    <% unless resource.can_receive_payments? %>
+    <% unless resource.can_receive_payments?
+      <br><br>
       <h4 class="mb-6 text-xl font-semibold leading-none text-gray-900">You wont be able to sell items until you register with Stripe!</h4>
       <%= stripe_connect_button %>
     <% else %>

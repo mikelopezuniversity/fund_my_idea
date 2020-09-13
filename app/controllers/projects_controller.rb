@@ -26,8 +26,12 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user_id = current_user.id
+
     respond_to do |format|
       if @project.save
+        if @project.perks.any? && current_user.can_receive_payments?
+          CreatePerkPlansJob.perform_now(@project)
+        end    
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else

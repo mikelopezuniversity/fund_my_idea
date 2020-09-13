@@ -2,6 +2,19 @@
   <h3 class="mb-2 text-2xl font-bold text-center">You're about to fund <em><%= @project.title %> </em></h3>
 
   <div class="p-6 border rounded">
-    <%= render "form" %>
-  </div>
-</div>
+    <%= form_with model: current_user, url: subscription_url, method: :post, html: { id: "payment-form", class: "stripe-form" }, data: { stripe_key: project.user.publishable_key }  do |form| %>
+      <div>
+        <label for="card-element" class="label">
+          Credit or debit card
+        </label>
+
+        <div id="card-element">
+          <!-- A Stripe Element will be inserted here. -->
+        </div>
+
+        <!-- Used to display Element errors. -->
+        <div id="card-errors" role="alert" class="text-sm text-red-400"></div>
+      </div>
+
+      <button>Back <%= number_to_currency(params[:amount]) %> /mo toward <em><%= project.title %></em></button>
+    <% end %>

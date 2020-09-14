@@ -25,13 +25,12 @@ class SubscriptionsController < ApplicationController
               end
 
     subscription = Stripe::Subscription.create({
-      customer: customer,
+      customer: (@customer),
       items: [
         {
-          plan: plan
+          plan: (@plan)
         }
       ],
-      id: @perk.id,
       expand: ["latest_invoice.payment_intent"],
       application_fee_percent: 10,
     }, stripe_acccount: key)

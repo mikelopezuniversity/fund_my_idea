@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  resources :subscriptions
+  resources :subscription
 
   root to: "projects#index"
 end

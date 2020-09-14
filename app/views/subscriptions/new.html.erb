@@ -2,7 +2,7 @@
   <h3 class="mb-2 text-2xl font-bold text-center">You're about to fund <em><%= @project.title %> </em></h3>
 
   <div class="p-6 border rounded">
-    <%= form_with model: current_user, url: subscription_url, method: :post, html: { id: "payment-form", class: "stripe-form" }, data: { stripe_key: project.user.publishable_key }  do |form| %>
+    <%= form_with model: current_user, url: subscription_url, method: :post, html: { :id "payment-form", class: "stripe-form" }, data: { stripe_key: project.user.publishable_key }  do |form| %>
       <div>
         <label for="card-element" class="label">
           Credit or debit card

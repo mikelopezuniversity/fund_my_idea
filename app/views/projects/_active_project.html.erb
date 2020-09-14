@@ -54,12 +54,12 @@
           <p class="pb-2 mb-2 text-sm italic text-center border-b"><%= perk.quantity %> left</p>
           <div class="py-2 text-gray-700">
             <%= simple_format perk.description %>
-          </div>funders:
+          </div>
 
           <% if user_signed_in? && perk.project.user_id == current_user.id %>
             <em class="block text-sm text-center">Sorry, You can't fund your own project</em>
           <% else %>
-          <%= link_to "Back this idea for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project, plan: "#{perk.title.parameterize}-perk_#{perk.id}"), class: "btn btn-default btn-expanded" %>
+          <%= link_to "Help fund this project for #{number_to_currency(perk.amount)} /mo", new_subscription_path(amount: perk.amount, project: project, plan: "#{perk.title.parameterize}-perk_#{perk.id}"), class: "btn btn-default btn-expanded" %>
           <% end %>
         </div>
       <% end %>

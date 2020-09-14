@@ -1,7 +1,19 @@
 class CreatePerkPlansJob < ApplicationJob
   queue_as :default
+  require 'stripe'
+  def perform(project)
+    key = project.user.access_code
+    Stripe.api_key = key
 
-  def perform(*args)
-    # Do something later
+    project.perks.each do |perk|
+      Stripe::Plan.create({
+        id: "#{perk.title.parameterize}-perk_#{perk.id}",
+        amount: (perk.amount.to_r * 100).to_i,
+        currency: 'usd',
+        interval: 'month',
+        product: { name: perk.title },
+        nickname: perk.title.parameterize
+      })
+    end
   end
 end

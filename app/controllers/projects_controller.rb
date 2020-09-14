@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
       if @project.save
         if @project.perks.any? && current_user.can_receive_payments?
           CreatePerkPlansJob.perform_now(@project)
-        end    
+        end
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -75,4 +75,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :user_id, :donation_goal, :description, :thumbnail, perks_attributes: [:id, :_destroy, :title, :description, :amount, :quantity])
     end
+    def project_id
+      @project = Project.find(params[:id])
+    end   
 end

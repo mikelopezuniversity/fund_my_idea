@@ -237,6 +237,10 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stripe (5.25.0)
+    stripe-rails (1.10.1)
+      rails (>= 3)
+      responders
+      stripe (>= 1.36.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -290,6 +294,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe
+  stripe-rails (~> 1.10)
   turbolinks (~> 5)
   webdrivers
   webpacker (~> 4.0)

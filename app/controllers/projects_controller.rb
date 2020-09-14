@@ -76,6 +76,6 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :user_id, :donation_goal, :description, :thumbnail, perks_attributes: [:id, :_destroy, :title, :description, :amount, :quantity])
     end
     def project_id
-      @project = Project.find(params[:id])
-    end   
+      @project.project_id = Project.find(params[:id])
+    end
 end

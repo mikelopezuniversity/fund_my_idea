@@ -1,13 +1,11 @@
 
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-
+  require 'stripe'
   def new
     @project = Project.find(params[:project])
   end
 
-  # Reference:
-  # https://stripe.com/docs/connect/subscriptions
   def create
     @project = Project.find(params[:project])
     key = @project.user.access_code
@@ -16,7 +14,6 @@ class SubscriptionsController < ApplicationController
     plan_id = params[:plan]
     plan = Stripe::Plan.retrieve(plan_id)
     token = params[:stripeToken]
-    INVALID_STRIPE_OPERATION = 'Invalid Stripe Operation'
     def self.execute(order:, user:)
     customer =  self.find_or_create_customer(card_token: order.token,
                                                  customer_id: user.stripe_customer_id,

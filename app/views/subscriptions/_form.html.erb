@@ -1,4 +1,4 @@
-<%= form_with model: current_user, url: subscription_url(@project.project_id), method: :post, html: { id: "payment-form", class: "stripe-form" }, data: { stripe_key: project.user.publishable_key }  do |form| %>
+<%= form_with model: current_user, url: subscription_url(@project.id), method: :post, html: { id: "payment-form", class: "stripe-form" }, data: { stripe_key: project.user.publishable_key }  do |form| %>
   <div>
     <label for="card-element" class="label">
       Credit or debit card

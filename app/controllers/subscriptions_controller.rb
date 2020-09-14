@@ -10,6 +10,7 @@ class SubscriptionsController < ApplicationController
   # https://stripe.com/docs/connect/subscriptions
   def create
     @project = Project.find(params[:project])
+    @project.project_id = Project.find(params[:id])
     key = @project.user.access_code
     Stripe.api_key = key
 

@@ -68,5 +68,3 @@ gem 'dotenv-rails'
 gem 'stripe'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-stripe-connect'
-
-gem "stripe-rails", "~> 1.10"

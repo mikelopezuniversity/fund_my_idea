@@ -6,6 +6,8 @@ class SubscriptionsController < ApplicationController
     @project = Project.find(params[:project])
   end
 
+  # Reference:
+  # https://stripe.com/docs/connect/subscriptions
   def create
     @project = Project.find(params[:project])
     key = @project.user.access_code
@@ -14,29 +16,24 @@ class SubscriptionsController < ApplicationController
     plan_id = params[:plan]
     plan = Stripe::Plan.retrieve(plan_id)
     token = params[:stripeToken]
-    def self.execute(order:, user:)
-    customer =  self.find_or_create_customer(card_token: order.token,
-                                                 customer_id: user.stripe_customer_id,
-                                                 email: user.email)
-        if customer and user.update(stripe_customer_id: customer.id)
-          order.customer_id = customer.id
-          charge = self.execute_subscription(plan: product.stripe_plan_name,
-                                             customer: customer)
-        end
-      end
-      unless charge&.id.blank?
-        # If there is a charge with id, set order paid.
-        order.charge_id = charge.id
-        order.set_paid
-      end
-    rescue Stripe::StripeError => e
-      # If a Stripe error is raised from the API,
-      # set status failed and an error message
-      order.error_message = INVALID_STRIPE_OPERATION
-      order.set_failed
-    end
 
-    stripe_acccount: key
+
+    customer = if current_user.stripe_id?
+                Stripe::Customer.retrieve(current_user.stripe_id)
+              else
+                Stripe::Customer.create(email: current_user.email, source: token)
+              end
+
+    subscription = Stripe::Subscription.create({
+      customer: customer,
+      items: [
+        {
+          plan: plan
+        }
+      ],
+      expand: ["latest_invoice.payment_intent"],
+      application_fee_percent: 10,
+    }, stripe_acccount: key)
 
 
     options = {
@@ -75,25 +72,4 @@ class SubscriptionsController < ApplicationController
     current_user.save
     redirect_to root_path, notice: "Your subscription has been cancelled."
   end
-  private
-
-  def self.execute_subscription(plan:, customer:)
-    customer.subscriptions.create({
-      plan: plan
-    })
-  end
-  email = user.email
-  def self.find_or_create_customer(card_token:, customer_id:, email:)
-    if customer_id
-      stripe_customer = Stripe::Customer.retrieve({ id: customer_id })
-      if stripe_customer
-        stripe_customer = Stripe::Customer.update(stripe_customer.id, { source: card_token})
-      end
-    else
-      stripe_customer = Stripe::Customer.create({
-        email: email,
-        source: card_token
-      })
-    end
-    stripe_customer
-  end
+end

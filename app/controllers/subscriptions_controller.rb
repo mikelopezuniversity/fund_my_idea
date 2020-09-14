@@ -31,7 +31,7 @@ class SubscriptionsController < ApplicationController
           plan: plan
         }
       ],
-      id: perk.id,
+      id: @perk.id,
       expand: ["latest_invoice.payment_intent"],
       application_fee_percent: 10,
     }, stripe_acccount: key)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_083629) do
+ActiveRecord::Schema.define(version: 2020_09_14_012617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 2020_09_13_083629) do
     t.string "provider"
     t.string "access_code"
     t.string "publishable_key"
+    t.string "stripe_id"
+    t.string "stripe_subscription_id"
+    t.boolean "subscribed"
+    t.string "current_plan"
+    t.string "card_last4"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.string "card_type"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
